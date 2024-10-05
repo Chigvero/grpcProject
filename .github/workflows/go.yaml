@@ -9,7 +9,7 @@ on:
 env:
   IMAGE_NAME: "myimage"
   CONTAINER_NAME: "crud-server-container"
-
+  REGISTRY: "docker-io"
 jobs:
   image-build-and-push:
     runs-on: ubuntu-22.04
@@ -25,5 +25,5 @@ jobs:
           TAG_NAME=$(echo $GITHUB_SHA | head -c7)
           docker buildx create --use
           docker buildx build --no-cache --push --tag my-image:v01 -f ./Dockerfile .
-
+  
 
