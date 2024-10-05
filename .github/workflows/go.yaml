@@ -24,6 +24,6 @@ jobs:
         run: |
           TAG_NAME=$(echo $GITHUB_SHA | head -c7)
           docker buildx create --use
-          docker buildx build --no-cache --push --tag my-image:v01 -f github.com/grpcProject/Dockerfile github.com/grpcProject
+          docker buildx build --no-cache --push --tag my-image:v01 -f github.com/Chigvero/grpcProject/Dockerfile github.com/Chigvero/grpcProject
 
 
