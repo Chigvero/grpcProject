@@ -9,7 +9,7 @@ on:
 env:
   IMAGE_NAME: "myimage"
   CONTAINER_NAME: "crud-server-container"
-  REGISTRY: "docker-io"
+  REGISTRY: "109.172.89.231:5000"
 jobs:
   image-build-and-push:
     runs-on: ubuntu-22.04
