@@ -26,6 +26,9 @@ jobs:
           echo '{ "exec-opts": ["native.cgroupdriver=systemd"], "insecure-registries":["109.172.89.231:5000"] }' | sudo tee /etc/docker/daemon.json
           sudo systemctl restart docker
 
+      - name: Check Docker configuration
+        run: cat /etc/docker/daemon.json
+
       - name: Login to Docker Registry
         run: docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} $REGISTRY
 
@@ -33,5 +36,4 @@ jobs:
         run: |
           TAG_NAME=$(echo $GITHUB_SHA | head -c7)
           docker buildx create --use
-          docker buildx build --no-cache --platform linux/amd64 -t $REGISTRY/$IMAGE_NAME:$TAG_NAME .
           docker buildx build --no-cache --platform linux/amd64 -t $REGISTRY/$IMAGE_NAME:$TAG_NAME --push .
