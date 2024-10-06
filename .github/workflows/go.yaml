@@ -23,7 +23,7 @@ jobs:
 
       - name: Configure Docker to use insecure registry
         run: |
-          echo '{ "exec-opts": ["native.cgroupdriver=systemd"], "insecure-registries":["109.172.89.231:5000"] }' | sudo tee /etc/docker/daemon.json
+          echo '{ "exec-opts": ["native.cgroupdriver=systemd"], "insecure-registries":[] }' | sudo tee /etc/docker/daemon.json
           sudo systemctl restart docker
 
       - name: Check Docker configuration
