@@ -29,6 +29,9 @@ jobs:
       - name: Check Docker configuration
         run: cat /etc/docker/daemon.json
 
+      - name: Check Docker status
+        run: sudo systemctl status docker
+
       - name: Login to Docker Registry
         run: docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} $REGISTRY
 
