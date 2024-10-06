@@ -7,7 +7,7 @@ on:
     branches: [ main, master ]
 
 env:
-  IMAGE_NAME: "registry"
+  IMAGE_NAME: "109.172.89.231:5000/registry"
   CONTAINER_NAME: "crud-server-container"
   REGISTRY: "http://109.172.89.231:5000"
 
