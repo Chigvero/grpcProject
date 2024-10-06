@@ -9,7 +9,7 @@ on:
 env:
   IMAGE_NAME: "109.172.89.231:5000/registry"
   CONTAINER_NAME: "crud-server-container"
-  REGISTRY: "http://109.172.89.231:5000"
+  REGISTRY: "109.172.89.231:5000"
 
 jobs:
   image-build-and-push:
