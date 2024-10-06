@@ -7,9 +7,9 @@ on:
     branches: [ main, master ]
 
 env:
-  IMAGE_NAME: "myimage"
+  IMAGE_NAME: "registry"
   CONTAINER_NAME: "crud-server-container"
-  REGISTRY: "https://index.docker.io/v1/"
+  REGISTRY: "http://109.172.89.231:5000"
 
 jobs:
   image-build-and-push:
