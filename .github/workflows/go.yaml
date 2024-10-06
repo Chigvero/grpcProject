@@ -7,7 +7,7 @@ on:
     branches: [ main, master ]
 
 env:
-  IMAGE_NAME: "109.172.89.231:5000/registry"
+  IMAGE_NAME: "registry"
   CONTAINER_NAME: "crud-server-container"
   REGISTRY: "109.172.89.231:5000"
 
@@ -27,12 +27,11 @@ jobs:
           sudo systemctl restart docker
 
       - name: Login to Docker Registry
-        run: |
-          docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} $REGISTRY
-          sudo systemctl restart docker
+        run: docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} $REGISTRY
 
       - name: Build and Push Docker Image
         run: |
           TAG_NAME=$(echo $GITHUB_SHA | head -c7)
           docker buildx create --use
           docker buildx build --no-cache --platform linux/amd64 -t $REGISTRY/$IMAGE_NAME:$TAG_NAME .
+          docker buildx build --no-cache --platform linux/amd64 -t $REGISTRY/$IMAGE_NAME:$TAG_NAME --push .
