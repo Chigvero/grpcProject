@@ -32,5 +32,4 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           TAG_NAME=$(echo $GITHUB_SHA | head -c7)
-          docker buildx create --use
           docker buildx build --no-cache --push --tag $IMAGE_NAME:$TAG_NAME -f ./Dockerfile .
