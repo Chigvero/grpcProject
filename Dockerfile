@@ -10,7 +10,7 @@ RUN go mod download
 
 RUN go build -o ./bin/crud_server cmd/grpc_server/main.go
 
-FROM alpine:latest
+FROM alpine:3.20
 ##Нужна для работы нашего приложения
 
 WORKDIR /root/

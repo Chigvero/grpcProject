@@ -34,5 +34,10 @@ build:
 copy-to-server:
 	scp service_linux root@109.172.89.231:
 
+##Пример того как сделать все мануально
+##Надо Автоматихировать это все через CI/CD
 docker-build-and-push:
-	docker buildx build --no-cache --platform linux/amd64 -t <REGESTRY>/test-server:v0.0.1 .
+	docker buildx create --use
+	docker buildx build --no-cache --platform linux/amd64 -t cr.selcloud.ru/chigvero/my_registry:v0.0.1 . --load
+	docker login -u token -p dG9rZW46Q1JnQUFBQUFqS0xHRUF6ZUlacmlLbWZNZDFURTFPV0cyVmx5T3UyeA==  cr.selcloud.ru/chigvero
+	docker push cr.selcloud.ru/chigvero/my_registry:v0.0.1

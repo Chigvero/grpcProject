@@ -9,7 +9,7 @@ on:
 env:
   IMAGE_NAME: "registry"
   CONTAINER_NAME: "crud-server-container"
-  REGISTRY: "109.172.89.231:5000"
+  REGISTRY: "cr.selcloud.ru/chigvero"
 
 jobs:
   image-build-and-push:
