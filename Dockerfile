@@ -15,7 +15,7 @@ FROM alpine:3.20
 
 WORKDIR /root/
 
-COPY --from=builder /github.com/Chigvero/source/bin/crud_server .
+COPY --from=builder /github.com/Chigvero/source/bin/crud_server  .
+COPY --from=builder /github.com/Chigvero/source/local.env  .
 
-ENTRYPOINT ["./bin/crud_server"]
-CMD ["--config-path", "local.env"]
+ENTRYPOINT ["./crud_server","--config-path", "local.env"]
