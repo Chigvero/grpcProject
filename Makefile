@@ -39,5 +39,5 @@ copy-to-server:
 docker-build-and-push:
 	docker buildx create --use
 	docker buildx build --no-cache --platform linux/amd64 -t cr.selcloud.ru/chigvero/my_registry:v0.0.1 . --load
-	docker login -u token -p dG9rZW46Q1JnQUFBQUFqS0xHRUF6ZUlacmlLbWZNZDFURTFPV0cyVmx5T3UyeA==  cr.selcloud.ru/chigvero
+	docker login -u token -p CRgAAAAAaNthevgWAUiQ4kYsHGyKMNXR4hgSFICc==  cr.selcloud.ru/chigvero
 	docker push cr.selcloud.ru/chigvero/my_registry:v0.0.1
