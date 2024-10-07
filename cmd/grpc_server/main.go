@@ -2,7 +2,9 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"flag"
+	"github.com/Chigvero/grpcProject/internal/config"
+	"github.com/Chigvero/grpcProject/internal/config/env"
 	desc "github.com/Chigvero/grpcProject/pkg/note_v1"
 	"github.com/brianvoe/gofakeit"
 	"google.golang.org/grpc"
@@ -12,10 +14,7 @@ import (
 	"net"
 )
 
-const (
-	hostStr  = "localhost"
-	grpcPort = 50051
-)
+var configPath string
 
 type server struct {
 	desc.UnimplementedNoteV1Server
@@ -39,15 +38,33 @@ func (s *server) Get(ctx context.Context, req *desc.GetRequest) (*desc.GetRespon
 	}, nil
 }
 
+func init() {
+	flag.StringVar(&configPath, "config-path", ".env", "path to config file")
+}
+
 func main() {
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", grpcPort))
+	flag.Parse()
+	err := config.Load(configPath)
+	if err != nil {
+		log.Fatalf("Error with loading configPath:%v\n", err)
+	}
+	grpcConfig, err := env.NewGRPCCongfig()
+	if err != nil {
+		log.Fatalf("failed to get grpcConfig:%v", err)
+	}
+	_, err = env.NewPGConfig()
+	//need to add pgConfig
+	if err != nil {
+		log.Fatalf("failed to get grpcConfig:%v", err)
+	}
+	lis, err := net.Listen("tcp", grpcConfig.Address())
 	if err != nil {
 		log.Fatalf("Error with listening port:%v\n", err)
 	}
 	s := grpc.NewServer()
 	reflection.Register(s)
 	desc.RegisterNoteV1Server(s, &server{})
-	log.Println("server listening at:", grpcPort)
+	log.Println("server listening at:", grpcConfig)
 	err = s.Serve(lis)
 	if err != nil {
 		log.Fatalf("failed to serve: %v", err)
