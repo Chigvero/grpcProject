@@ -17,5 +17,5 @@ WORKDIR /root/
 
 COPY --from=builder /github.com/Chigvero/source/bin/crud_server .
 
-CMD ["./crud_server"]
-
+ENTRYPOINT ["./crud_server"]
+CMD ["--config-path=local.env"]
